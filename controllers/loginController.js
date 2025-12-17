@@ -1,4 +1,4 @@
-import User from "../models/User"; 
+import User from "../models/User.js"; 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -90,3 +90,4 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
