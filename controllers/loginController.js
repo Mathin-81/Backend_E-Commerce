@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../models/user.js"; // ✅ lowercase (IMPORTANT)
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -36,12 +36,12 @@ export const registerUser = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error(err);
+    console.error("REGISTER ERROR:", err);
     res.status(500).json({ error: "Server error" });
   }
 };
 
-// LOGIN USER (JWT ADDED)
+// LOGIN USER (JWT)
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -60,7 +60,14 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ error: "Invalid email or password" });
     }
 
-    // 🔐 CREATE JWT
+    // 🔐 JWT SECRET CHECK
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({
+        error: "JWT_SECRET not configured on server",
+      });
+    }
+
+    // 🔐 CREATE TOKEN
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
@@ -79,8 +86,7 @@ export const loginUser = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error(err);
+    console.error("LOGIN ERROR:", err);
     res.status(500).json({ error: "Server error" });
   }
 };
-
