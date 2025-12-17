@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/User";
+import User from "../models/User.js";
 
 // VERIFY TOKEN
 export const protect = async (req, res, next) => {
@@ -32,3 +32,4 @@ export const adminOnly = (req, res, next) => {
 
   return res.status(403).json({ message: "Admin access only" });
 };
+
