@@ -1,4 +1,4 @@
-import Product from "../models/Product.js";
+import Product from "../models/Products.js";
 
 // GET all products (Public)
 export const getProducts = async (req, res) => {
@@ -13,7 +13,7 @@ export const getProducts = async (req, res) => {
 // CREATE product (Admin)
 export const createProduct = async (req, res) => {
   try {
-    const { name, price, category, img, rating } = req.body;
+    const { name, price, category, img, rating, stock } = req.body;
 
     if (!name || !price || !category || !img) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -25,6 +25,7 @@ export const createProduct = async (req, res) => {
       category,
       img,
       rating,
+      stock: stock || 50,
     });
 
     res.status(201).json(product);

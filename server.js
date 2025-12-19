@@ -7,6 +7,7 @@ import contactRoutes from "./routes/contactRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/auth", authRoutes);
 
 /* ---------------- SERVER ---------------- */
 
